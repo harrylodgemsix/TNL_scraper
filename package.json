@@ -1,0 +1,51 @@
+{
+  "private": true,
+  "name": "lemonpi-client-scripts",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --check '**/*.{css,graphql,html,json,md,scss,yml}'",
+    "build": "rollup -c",
+    "dev": "rollup -cw",
+    "serve": "browser-sync start --server 'dist' --directory --https --port 443",
+    "start": "npm run build && npm run serve > /dev/null | npm run dev"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint -- --fix",
+      "git add"
+    ],
+    "*.{css,graphql,html,json,md,scss,yml}": [
+      "npm run format -- --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "author": "Rick Stevens <rick.stevens@greenhousegroup.com> (http://www.greenhousegroup.com/)",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "browser-sync": "^2.26.12",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.3.0",
+    "prettier": "^2.1.1",
+    "rollup": "^2.26.11",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-uglify": "^6.0.4"
+  },
+  "dependencies": {
+    "lemonpi-scraper-helper": "latest",
+    "lemonpi-soft-landing-helper": "latest"
+  }
+}
